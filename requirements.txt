@@ -1,0 +1,14 @@
+# Hearthstone Linux Launcher — Python dependencies
+#
+# Core (required)
+PyQt6>=6.4.0
+
+# Login page browser (required for the Login tab)
+# If not installed, the Login tab shows an install prompt instead.
+PyQt6-WebEngine>=6.4.0
+
+# AES token file encryption (optional)
+# Used to write the binary `token` file compatible with the
+# upstream CoreFoundation stub. The client.config injection path
+# works without this, so it's not strictly required.
+pycryptodome>=3.18.0
