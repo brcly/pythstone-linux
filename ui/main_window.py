@@ -101,7 +101,7 @@ class HeaderBar(QWidget):
 
         # Wordmark
         self._wordmark = QLabel(
-            "⬡  Pythstone  <span style='color:#f59e0b'>Linux</span>"
+            "⬡  Hearthstone  <span style='color:#f59e0b'>Linux</span>"
         )
         self._wordmark.setTextFormat(Qt.TextFormat.RichText)
 
@@ -148,8 +148,20 @@ class NavButton(QPushButton):
         self.setFixedHeight(44)
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
 
-        inner = QHBoxLayout(self)
-        inner.setContentsMargins(16, 0, 16, 0)
+        # Outer layout: indicator bar | content
+        outer = QHBoxLayout(self)
+        outer.setContentsMargins(0, 0, 0, 0)
+        outer.setSpacing(0)
+
+        # Active indicator — a narrow colored bar on the left edge
+        self._indicator = QFrame()
+        self._indicator.setFixedWidth(3)
+        self._indicator.setStyleSheet(f"background: transparent; border: none;")
+        outer.addWidget(self._indicator)
+
+        # Content: icon + label
+        inner = QHBoxLayout()
+        inner.setContentsMargins(13, 0, 16, 0)
         inner.setSpacing(12)
 
         self._icon_lbl = QLabel(icon_char)
@@ -163,6 +175,7 @@ class NavButton(QPushButton):
         inner.addWidget(self._icon_lbl)
         inner.addWidget(self._text_lbl)
         inner.addStretch()
+        outer.addLayout(inner)
 
         self._apply_styles()
 
@@ -174,18 +187,27 @@ class NavButton(QPushButton):
             QPushButton {{
                 background: transparent;
                 border: none;
-                border-left: 2px solid transparent;
                 text-align: left;
             }}
             QPushButton:hover {{
                 background: {CLR_NAV_HOVER};
-                border-left: 2px solid {CLR_ACCENT_DIM};
             }}
             QPushButton:checked {{
                 background: {CLR_NAV_ACTIVE};
-                border-left: 2px solid {CLR_ACCENT};
             }}
         """)
+
+    def enterEvent(self, event) -> None:
+        if not self.isChecked():
+            self._indicator.setStyleSheet(
+                f"background: {CLR_ACCENT_DIM}; border: none;"
+            )
+        super().enterEvent(event)
+
+    def leaveEvent(self, event) -> None:
+        if not self.isChecked():
+            self._indicator.setStyleSheet("background: transparent; border: none;")
+        super().leaveEvent(event)
 
     def set_active(self, active: bool) -> None:
         self.setChecked(active)
@@ -195,6 +217,8 @@ class NavButton(QPushButton):
             f"color: {colour}; font-size: 13px; font-weight: {weight}; "
             f"background: transparent;"
         )
+        bar_colour = CLR_ACCENT if active else "transparent"
+        self._indicator.setStyleSheet(f"background: {bar_colour}; border: none;")
 
 
 # ---------------------------------------------------------------------------
@@ -227,19 +251,13 @@ class Sidebar(QWidget):
 
         layout.addStretch()
 
-        # Divider + repo link at the bottom
-        divider = QFrame()
-        divider.setFrameShape(QFrame.Shape.HLine)
-        divider.setStyleSheet(f"color: {CLR_BORDER};")
-        layout.addWidget(divider)
-
         # Activate first item by default
         if self._buttons:
             self._buttons[0].set_active(True)
 
     def _apply_styles(self) -> None:
         self.setStyleSheet(f"""
-            QWidget {{
+             QWidget#Sidebar {{
                 background-color: {CLR_BG_SIDEBAR};
                 border-right: 1px solid {CLR_BORDER};
             }}
