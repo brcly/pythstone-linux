@@ -10,10 +10,10 @@ Pythstone handles the full install pipeline — downloading game files, fetching
 
 ## Screenshots
 
-[!Screenshot1](https://github.com/brcly/brcly.github.io/blob/main/screenshots/Screenshot_20260406_101021.png)
-[!Screenshot2](https://github.com/brcly/brcly.github.io/blob/main/screenshots/Screenshot_20260406_101051.png)
-[!Screenshot3](https://github.com/brcly/brcly.github.io/blob/main/screenshots/Screenshot_20260406_101109.png)
-[!Screenshot4](https://github.com/brcly/brcly.github.io/blob/main/screenshots/Screenshot_20260406_101122.png)
+![Screenshot1](https://github.com/brcly/brcly.github.io/blob/main/screenshots/Screenshot_20260406_101021.png)
+![Screenshot2](https://github.com/brcly/brcly.github.io/blob/main/screenshots/Screenshot_20260406_101051.png)
+![Screenshot3](https://github.com/brcly/brcly.github.io/blob/main/screenshots/Screenshot_20260406_101109.png)
+![Screenshot4](https://github.com/brcly/brcly.github.io/blob/main/screenshots/Screenshot_20260406_101122.png)
 
 ---
 
