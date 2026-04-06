@@ -138,7 +138,3 @@ pythstone-linux/
 - [0xf4b1/keg](https://github.com/0xf4b1/keg) — the Blizzard CDN downloader used to fetch game files
 
 ---
-
-## License
-
-MIT
